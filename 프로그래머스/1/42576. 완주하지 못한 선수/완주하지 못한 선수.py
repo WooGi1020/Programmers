@@ -1,15 +1,13 @@
 def solution(participant, completion):
     count_dict = {}
+    temp = 0
     
     for name in participant:
-        if name in count_dict:
-            count_dict[name] += 1
-        else:
-            count_dict[name] = 1
+        count_dict[int(hash(name))] = name
+        temp += int(hash(name))
 
     for name in completion:
-        count_dict[name] -= 1
+        if int(hash(name)) in count_dict:
+            temp -= int(hash(name))
 
-    for name in count_dict:
-        if count_dict[name] > 0:
-            return name
+    return count_dict[temp]
